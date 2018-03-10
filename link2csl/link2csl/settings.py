@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'auth',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -123,7 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'auth.Account'
+AUTH_USER_MODEL = 'authentication.Account'
 
 
 # Rest Framework permissions and authentication middleware
