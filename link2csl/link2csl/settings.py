@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
-import dj_database_url
+
 from datetime import datetime
 from datetime import timedelta
 
@@ -86,7 +86,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+import dj_database_url
+db_prod = dj_database_url.config()
+DATABASES['default'].update(db_prod)
 
 
 # Password validation
