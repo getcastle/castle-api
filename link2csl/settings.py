@@ -31,7 +31,7 @@ SECRET_KEY = 'wskivjb*-4ppl+sgq8$yqqb*s+oj3jjwo7i^iq28sh9@0)#vhm'
 DEBUG = True
 
 ALLOWED_HOSTS = ['https://damp-hamlet-72049.herokuapp.com/']
-
+APPEND_SLASH = False
 
 # Application definition
 
