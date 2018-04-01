@@ -7,8 +7,8 @@ from .views import (
     )
 
 urlpatterns = [
-    url(r'^login/$', UserLoginAPIView.as_view(), name='login'),
-    url(r'^register/$', UserCreateAPIView.as_view(), name='register'),
+    url(r'^/login$', UserLoginAPIView.as_view(), name='login'),
+    url(r'^/register$', UserCreateAPIView.as_view(), name='register'),
 ]
 # from django.conf.urls import include, url
 # from .views import AuthLogin, AuthRegister
