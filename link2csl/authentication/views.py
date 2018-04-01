@@ -28,9 +28,44 @@ from rest_framework.permissions import (
 
     )
 
-from posts.api.permissions import IsOwnerOrReadOnly
-from posts.api.pagination import PostLimitOffsetPagination, PostPageNumberPagination
+# from posts.api.permissions import IsOwnerOrReadOnly
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
+
+class IsOwnerOrReadOnly(BasePermission):
+    message = 'You must be the owner of this object.'
+    # my_safe_method = ['GET', 'PUT']
+    # def has_permission(self, request, view):
+    #     if request.method in self.my_safe_method:
+    #         return True
+    #     return False
+
+    def has_object_permission(self, request, view, obj):
+        #member = Membership.objects.get(user=request.user)
+        #member.is_active
+        if request.method in SAFE_METHODS:
+            return True
+        return obj.user == request.user
+
+# from posts.api.pagination import PostLimitOffsetPagination, PostPageNumberPagination
+
+from rest_framework.pagination import (
+    LimitOffsetPagination,
+    PageNumberPagination,
+    )
+
+
+
+class PostLimitOffsetPagination(LimitOffsetPagination):
+    default_limit = 10
+    max_limit = 10
+
+
+class PostPageNumberPagination(PageNumberPagination):
+    page_size = 20
+
+
+    
 User = get_user_model()
 
 
@@ -55,56 +90,4 @@ class UserLoginAPIView(APIView):
         if serializer.is_valid(raise_exception=True):
             new_data = serializer.data
             return Response(new_data, status=HTTP_200_OK)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST
-
-# from django.shortcuts import render
-
-# import json
-
-# from rest_framework import generics
-# from rest_framework import status
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from rest_framework.permissions import AllowAny
-
-# from django.contrib.auth import login, authenticate
-
-# from .serializers import AccountSerializer
-# from .models import Account
-
-
-# class AuthRegister(APIView):
-#     """
-#     Register a new user.
-#     """
-#     serializer_class = AccountSerializer
-#     permission_classes = (AllowAny,)
-
-#     def post(self, request, format=None):
-#         serializer = self.serializer_class(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# class AuthLogin(APIView):
-#     ''' Manual implementation of login method '''
-#     def post(self, request, format=None):
-#         data = request.data
-#         email = data.get('email', None)
-#         password = data.get('password', None)
-
-#         account = authenticate(email=email, password=password)
-#         # Generate token and add it to the response object
-#         if account is not None:
-#             login(request, account)
-#             return Response({
-#                 'status': 'Successful',
-#                 'message': 'You have successfully been logged into your account.'
-#             }, status=status.HTTP_200_OK)
-
-#         return Response({
-#             'status': 'Unauthorized',
-#             'message': 'Username/password combination invalid.'
-#         }, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
