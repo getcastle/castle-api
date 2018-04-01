@@ -1,1 +1,1 @@
-web: gunicorn link2csl.wsgi
+gunicorn link2csl.wsgi:application
