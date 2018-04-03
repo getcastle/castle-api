@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 from django.conf import settings
+from django.urls import path
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -23,10 +24,9 @@ from django.contrib import admin
 from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
-    
+
     url(r'^admin', admin.site.urls),
-    url(r'^api/auth/token', obtain_jwt_token),
-    url(r'^api/auth', include('authentication.urls')),
+    path('api/auth/', include('authentication.urls')),
    
 ]
 
