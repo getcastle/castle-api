@@ -1,43 +1,27 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
-
-from rest_framework.serializers import (
-    CharField,
-    EmailField,
-    HyperlinkedIdentityField,
-    ModelSerializer,
-    SerializerMethodField,
-    ValidationError
-    )
-
-
 User = get_user_model()
 
+from rest_framework import serializers
 
-class UserDetailSerializer(ModelSerializer):
+from .models import Profile
+
+class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = [
-            'email',
-        ]
+        fields = ('id', 'email')
 
-class UserCreateSerializer(ModelSerializer):
-    email = EmailField(label='Email Address')
-    email2 = EmailField(label='Confirm Email')
+class UserCreateSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(label='Email Address')
+    email2 = serializers.EmailField(label='Confirm Email')
+
     class Meta:
         model = User
-        fields = [
-            'email',
-            'email2',
-            'password',
-            
-        ]
-        extra_kwargs = {"password":
-                            {"write_only": True}
-                            }
+        fields = ('email', 'email2', 'password')
+        extra_kwargs = {"password": {"write_only": True}}
+        
     def validate(self, data):
         return data
-
 
     def validate_email(self, value):
         data = self.get_initial()
@@ -60,42 +44,32 @@ class UserCreateSerializer(ModelSerializer):
             raise ValidationError("Emails must match.")
         return value
 
-
-
     def create(self, validated_data):
         email = validated_data['email']
         password = validated_data['password']
-        user_obj = User(
-                email = email
-            )
+        user_obj = User(email = email)
         user_obj.set_password(password)
         user_obj.save()
         return validated_data
 
+class ProfileSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Profile
+        exclude = ('id', 'user')
 
-class UserLoginSerializer(ModelSerializer):
-    token = CharField(allow_blank=True, read_only=True)
-    email = EmailField(label='Email Address')
+class UserLoginSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(read_only=True)
+
     class Meta:
         model = User
-        fields = [
-            'email',
-            'password',
-            'token',
-            
-        ]
-        extra_kwargs = {"password":
-                            {"write_only": True}
-                            }
-    def validate(self, data):
-        return data
+        fields = ('id', 'email', 'profile')
+
 # from django.contrib.auth import update_session_auth_hash
 
 # from rest_framework import serializers
 
 # from .models import Account
-
 
 # class AccountSerializer(serializers.ModelSerializer):
 #     password = serializers.CharField(write_only=True, required=True)
