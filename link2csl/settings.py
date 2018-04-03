@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
+import dj_database_url
 
 from datetime import datetime
 from datetime import timedelta
@@ -90,7 +91,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-import dj_database_url
+
 db_prod = dj_database_url.config()
 DATABASES['default'].update(db_prod)
 
