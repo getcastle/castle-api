@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
     path('login', views.login, name='auth.login'),
-    path('register', views.UserCreateAPIView.as_view(), name='auth.register'),
+    path('register', views.UserRegistrar.as_view(), name='auth.register'),
 ]
 # from django.conf.urls import include, url
 # from .views import AuthLogin, AuthRegister
