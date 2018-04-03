@@ -100,4 +100,8 @@ ENV/
 # mypy
 .mypy_cache/
 
+# dev databases
 *.sqlite3
+
+# editors
+.vscode
