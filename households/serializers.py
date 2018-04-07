@@ -4,13 +4,17 @@ from rest_framework import serializers
 User = get_user_model()
 from .models import Household, HouseholdMember
 
-class MemberSerializer(serializers.ModelSerializer):
-  """
-  """
-  pass
+from authentication.serializers import UserSerializer
 
-class HouseholdSerializer(serializers.ModelSerializer):
+class HouseholdListSerializer(serializers.ModelSerializer):
     
     class Meta:
       model = Household
       exclude = ('members',)
+  
+class HouseholdDetailSerializer(serializers.ModelSerializer):
+  members = UserSerializer(many=True)
+
+  class Meta:
+    model = Household
+    fields = '__all__'

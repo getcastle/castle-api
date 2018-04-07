@@ -7,7 +7,7 @@ class HouseholdList(generics.ListAPIView):
   """
   Allows a user to list and create the households they belong to.
   """
-  serializer_class = serializers.HouseholdSerializer
+  serializer_class = serializers.HouseholdListSerializer
   permission_classes = (permissions.IsAuthenticated,)
 
   def get_queryset(self, * args, ** kwargs):
@@ -21,5 +21,5 @@ class HouseholdDetail(generics.RetrieveAPIView):
   Allows a user to view and update a household they belong to.
   """
   queryset = Household.objects.all()
-  serializer_class = serializers.HouseholdSerializer
+  serializer_class = serializers.HouseholdDetailSerializer
   permission_classes = (permissions.IsAuthenticated,)
