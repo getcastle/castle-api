@@ -18,6 +18,10 @@ class Household(models.Model):
     through_fields=('household', 'user')
   )
 
+  def __str__(self):
+    """Return admin-friendly name of Household"""
+    return self.name
+
 class HouseholdMember(models.Model):
   """
   Through/relationship table mapping a user to a household since many users can be related to many housheolds and vice versa
@@ -41,4 +45,3 @@ class HouseholdMember(models.Model):
   # kicked out of household
   # kickedAt = models.DateTimeField(null=True, blank=True)
   # kickedBy = models.ForeignKey(User, null=True, blank=True)
-
