@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third party
+    'django_seed',
     'rest_framework',
     # local apps
     'authentication',
-    'households'
+    'households',
+    'devices'
 ]
 
 MIDDLEWARE = [
@@ -187,7 +189,7 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
 
-    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
 
 django_heroku.settings(locals())
