@@ -15,7 +15,8 @@ class Household(models.Model):
   members = models.ManyToManyField(
     User,
     through="HouseholdMember",
-    through_fields=('household', 'user')
+    through_fields=('household', 'user'),
+    related_name="households"
   )
 
   def __str__(self):
