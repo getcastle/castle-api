@@ -15,6 +15,7 @@ pytz = "==2018.3"
 gunicorn = "*"
 django-heroku = "*"
 "psycopg2" = "*"
+django-seed = "*"
 
 
 [dev-packages]
