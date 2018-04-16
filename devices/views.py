@@ -1,7 +1,10 @@
 from rest_framework import generics, permissions
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
 from . import serializers
 from devices.models import Device
 
+from .mqtt import client
 
 class HouseholdDeviceList(generics.ListAPIView):
   """
@@ -25,3 +28,17 @@ class HouseholdDeviceDetail(generics.RetrieveAPIView):
   queryset = Device.objects.all()
   serializer_class = serializers.DeviceSerializer
   permission_classes = (permissions.IsAuthenticated,)
+
+@api_view(['PUT'])
+def update_device_feature(req, pk):
+  # connect client to mosquitto broker
+  client.connect('bridge.get-castle.com')
+
+  # grab feature and val
+  payload = req.data
+  print(payload)
+
+  for attr, val in payload.items():
+    client.publish('cmnd/devices/{}/{}'.format(pk, attr), val)
+
+  return Response(payload)
