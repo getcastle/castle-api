@@ -1,27 +1,18 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
-django = "*"
+Django = "==2.0.2"
 djangorestframework = "==3.7.7"
 djangorestframework-jwt = "==1.11.0"
-pyjwt = "==1.6.0"
+PyJWT = "==1.6.0"
 pytz = "==2018.3"
 gunicorn = "*"
 django-heroku = "*"
 "psycopg2" = "*"
 django-seed = "*"
-
+paho-mqtt = "*"
 
 [dev-packages]
-
-
-
-[requires]
-
-python_version = "3.6"

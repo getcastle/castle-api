@@ -1,12 +1,10 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9e6d9d888da611acae12a61d2651c74f21d9aeca7c761c3f73e4cba929150c75"
+            "sha256": "18f70e6f9d7b96e2e9b0d4637f73b2ea28ead50a368d6b5fb90c6765f8e49a2a"
         },
         "pipfile-spec": 6,
-        "requires": {
-            "python_version": "3.6"
-        },
+        "requires": {},
         "sources": [
             {
                 "name": "pypi",
@@ -25,11 +23,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:2d8b9eed8815f172a8e898678ae4289a5e9176bc08295676eff4228dd638ea61",
-                "sha256:d81a1652963c81488e709729a80b510394050e312f386037f26b54912a3a10d0"
+                "sha256:7c8ff92285406fb349e765e9ade685eec7271d6f5c3f918e495a74768b765c99",
+                "sha256:dc3b61d054f1bced64628c62025d480f655303aea9f408e5996c339a543b45f0"
             ],
             "index": "pypi",
-            "version": "==2.0.4"
+            "version": "==2.0.2"
         },
         "django-heroku": {
             "hashes": [
@@ -64,10 +62,10 @@
         },
         "faker": {
             "hashes": [
-                "sha256:9cc12b821f32ff45f6edfdc1ab7be3893b60b1224e952d68322a57e5b26a4a15",
-                "sha256:b06d0dc0166618298e668ced513ced7b10df34f3ad2045f22f1d7d88704e8e9c"
+                "sha256:226d8fa67a8cf8b4007aab721f67639f130e9cfdc53a7095a2290ebb07a65c71",
+                "sha256:48fed4b4a191e2b42ad20c14115f1c6d36d338b80192075d7573f0f42d7fb321"
             ],
-            "version": "==0.8.12"
+            "version": "==0.8.13"
         },
         "gunicorn": {
             "hashes": [
@@ -76,6 +74,13 @@
             ],
             "index": "pypi",
             "version": "==19.7.1"
+        },
+        "paho-mqtt": {
+            "hashes": [
+                "sha256:31911f6031de306c27ed79dc77b690d7c55b0dcb0f0434ca34ec6361d0371122"
+            ],
+            "index": "pypi",
+            "version": "==1.3.1"
         },
         "psycopg2": {
             "hashes": [
